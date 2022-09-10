@@ -1,18 +1,12 @@
 ---
+import Countdown from "../components/Countdown.astro";
 import RaceSessionLink from "../components/RaceSessionLink.astro";
 import Layout from "../layouts/Layout.astro";
 
 const footerHeight = "4rem";
-const raceTime = { date: "2022-09-11", time: "13:00:00Z" };
+const goTime = { date: "2022-09-11", time: "13:00:00Z" };
 
-const date = new Date(raceTime.date + "T" + raceTime.time);
-
-const now = new Date();
-
-const diff = date.getTime() - now.getTime();
-
-const hours = Math.floor(diff / (1000 * 60 * 60));
-const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+const date = new Date(goTime.date + "T" + goTime.time);
 ---
 
 <Layout title="When is F1">
@@ -20,12 +14,24 @@ const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     class="bg-red-500 flex flex-col justify-center items-center min-h-screen-content gap-8"
   >
     <p class="text-center px-4 text-3xl">Racing at Monza starts in:</p>
-    <span class="break-inside-avoid text-7xl bold pt-4 pb-10 text-center">
-      {hours} hours {minutes} minutes</span
-    >
+    <Countdown goTime={date} />
     <div class="flex w-1/2 flex-col items-center md:flex-row md:justify-around">
-      <span>UTC: 14:00</span>
-      <span>Your time: 16:00</span>
+      <span
+        >UTC: {
+          date.toLocaleTimeString("en-GB", {
+            hour: "numeric",
+            minute: "numeric",
+          })
+        }
+      </span>
+      <span
+        >UTC again: {
+          date.toLocaleTimeString("en-GB", {
+            hour: "numeric",
+            minute: "numeric",
+          })
+        }
+      </span>
     </div>
     <div class="flex flex-col gap-4">
       <div class="flex justify-center gap-4 flex-col md:flex-row">
