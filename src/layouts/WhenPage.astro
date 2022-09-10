@@ -3,22 +3,28 @@ import Countdown from "../components/Countdown.astro";
 import RaceSessionLink from "../components/RaceSessionLink.astro";
 import Layout from "../layouts/Layout.astro";
 
-const footerHeight = "4rem";
-const goTime = { date: "2022-09-11", time: "13:00:00Z" };
+export interface Props {
+  session: string;
+  goTime: Date;
+}
 
-const date = new Date(goTime.date + "T" + goTime.time);
+const { session, goTime } = Astro.props;
+
+const footerHeight = "4rem";
 ---
 
 <Layout title="When is F1">
   <main
     class="bg-red-500 flex flex-col justify-center items-center min-h-screen-content gap-8"
   >
-    <p class="text-center px-4 text-3xl">Racing at Monza starts in:</p>
-    <Countdown goTime={date} />
+    <p class="text-center px-4 text-3xl">
+      <span class="capitalized">{session}</span> at Monza starts in:
+    </p>
+    <Countdown goTime={goTime} />
     <div class="flex w-1/2 flex-col items-center md:flex-row md:justify-around">
       <span
         >UTC: {
-          date.toLocaleTimeString("en-GB", {
+          goTime.toLocaleTimeString("en-GB", {
             hour: "numeric",
             minute: "numeric",
           })
@@ -26,7 +32,7 @@ const date = new Date(goTime.date + "T" + goTime.time);
       </span>
       <span
         >UTC again: {
-          date.toLocaleTimeString("en-GB", {
+          goTime.toLocaleTimeString("en-GB", {
             hour: "numeric",
             minute: "numeric",
           })
@@ -41,7 +47,7 @@ const date = new Date(goTime.date + "T" + goTime.time);
       </div>
       <div class="flex justify-center gap-4 flex-col md:flex-row">
         <RaceSessionLink href="/qualifying" label="Qualifying" />
-        <RaceSessionLink href="/race" label="Race" />
+        <RaceSessionLink href="/" label="Racing" />
       </div>
     </div>
   </main>

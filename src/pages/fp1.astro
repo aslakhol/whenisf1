@@ -2,9 +2,9 @@
 import WhenPage from "../layouts/WhenPage.astro";
 import monza from "../monza.json";
 
-const { date, time } = monza.MRData.RaceTable.Races[0];
+const { date, time } = monza.MRData.RaceTable.Races[0].FirstPractice;
 
 const goTime = new Date(date + "T" + time);
 ---
 
-<WhenPage session={"Racing"} goTime={goTime} />
+<WhenPage session={"FP1"} goTime={goTime} />
