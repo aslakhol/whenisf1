@@ -1,24 +1,52 @@
 ---
+import RaceSessionLink from "../components/RaceSessionLink.astro";
 import Layout from "../layouts/Layout.astro";
+
+const footerHeight = "4rem";
+const raceTime = { date: "2022-09-10", time: "14:00:00Z" };
+
+const date = new Date(raceTime.date + "T" + raceTime.time);
+
+const now = new Date();
+
+const diff = date.getTime() - now.getTime();
+
+const hours = Math.floor(diff / (1000 * 60 * 60));
+const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 ---
 
 <Layout title="When is F1">
-  <main>
-    <h1>Qualifying at Monza starts in 3 hours.</h1>
-    <div>
+  <main
+    class="bg-red-500 flex flex-col justify-center items-center min-h-screen-content gap-8"
+  >
+    <p class="text-center px-4 text-3xl">Qualifying at Monza starts in:</p>
+    <span class="break-inside-avoid text-7xl bold pt-4 pb-10">
+      {hours} hour {minutes} minutes</span
+    >
+    <div class="flex w-1/2 flex-col items-center md:flex-row md:justify-around">
       <span>UTC: 14:00</span>
       <span>Your time: 16:00</span>
     </div>
-    <div>
-      <div>FP1</div>
-      <div>FP2</div>
-      <div>FP3</div>
-      <div>Qualifying</div>
-      <div>Race</div>
+    <div class="flex w-full justify-around">
+      <RaceSessionLink href="/fp1" label="FP1" />
+      <RaceSessionLink href="/fp2" label="FP2" />
+      <RaceSessionLink href="/fp3" label="FP3" />
+      <RaceSessionLink href="/qualifying" label="Qualifying" />
+      <RaceSessionLink href="/race" label="Race" />
     </div>
   </main>
-  <footer>
-    <a href="schedule">Race schedule</a>
-    <a href="about">About whenisf1.at</a>
+  <footer class="bg-gray-500 flex justify-around items-center">
+    <a class="hover:underline" href="schedule">Race schedule</a>
+    <a class="hover:underline" href="about">About whenisf1.at</a>
   </footer>
 </Layout>
+
+<style define:vars={{ footerHeight }}>
+  .min-h-screen-content {
+    min-height: calc(100vh - var(--footerHeight));
+  }
+
+  footer {
+    height: var(--footerHeight);
+  }
+</style>
