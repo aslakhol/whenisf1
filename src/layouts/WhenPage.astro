@@ -24,7 +24,9 @@ const footerHeight = "4rem";
         >{circuit}
       </span> starts in:
     </p>
-    <Countdown goTime={goTime} client:idle />
+    <div class="h-32">
+      <Countdown goTime={goTime} client:only={"react"} />
+    </div>
     <div class="flex w-1/2 flex-col items-center md:flex-row md:justify-around">
       <span class="p-4 bg-brand-secondary rounded w-40 text-center"
         >UTC: {
@@ -35,7 +37,9 @@ const footerHeight = "4rem";
           })
         }
       </span>
-      <YourTime goTime={goTime} client:idle />
+      <div class="w-40">
+        <YourTime goTime={goTime} client:only={"react"} />
+      </div>
     </div>
     <div class="flex flex-col gap-4">
       <div class="flex justify-center gap-4 flex-col md:flex-row">
