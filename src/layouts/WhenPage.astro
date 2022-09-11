@@ -17,7 +17,7 @@ const footerHeight = "4rem";
 
 <Layout title="When is F1">
   <main
-    class="bg-red-500 flex flex-col justify-center items-center min-h-screen-content gap-8"
+    class="bg-brand-bg flex flex-col justify-center items-center min-h-screen-content gap-8"
   >
     <p class="text-center px-4 text-3xl">
       <span class="capitalized">{session}</span> at <span class="capitalized"
@@ -26,7 +26,7 @@ const footerHeight = "4rem";
     </p>
     <Countdown goTime={goTime} client:idle />
     <div class="flex w-1/2 flex-col items-center md:flex-row md:justify-around">
-      <span
+      <span class="p-4 bg-brand-secondary rounded w-40 text-center"
         >UTC: {
           goTime.toLocaleTimeString("en-GB", {
             timeZone: "UTC",
@@ -49,7 +49,7 @@ const footerHeight = "4rem";
       </div>
     </div>
   </main>
-  <footer class="bg-gray-500 flex justify-around items-center">
+  <footer class="bg-brand-footer flex justify-around items-center">
     <a class="hover:underline" href="schedule">Race schedule</a>
     <a class="hover:underline" href="about">About whenisf1.at</a>
   </footer>
