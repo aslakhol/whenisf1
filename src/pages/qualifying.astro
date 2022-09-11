@@ -1,8 +1,11 @@
 ---
 import WhenPage from "../layouts/WhenPage.astro";
-import monza from "../monza.json";
 
-const { date, time } = monza.MRData.RaceTable.Races[0].Qualifying;
+const data = await fetch("http://ergast.com/api/f1/current/next.json").then(
+  (res) => res.json()
+);
+
+const { date, time } = data.MRData.RaceTable.Races[0].Qualifying;
 
 const goTime = new Date(date + "T" + time);
 ---

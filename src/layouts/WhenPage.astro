@@ -1,6 +1,7 @@
 ---
-import Countdown from "../components/Countdown.astro";
+import Countdown from "../components/Countdown";
 import RaceSessionLink from "../components/RaceSessionLink.astro";
+import YourTime from "../components/YourTime.astro";
 import Layout from "../layouts/Layout.astro";
 
 export interface Props {
@@ -25,19 +26,13 @@ const footerHeight = "4rem";
       <span
         >UTC: {
           goTime.toLocaleTimeString("en-GB", {
+            timeZone: "UTC",
             hour: "numeric",
             minute: "numeric",
           })
         }
       </span>
-      <span
-        >UTC again: {
-          goTime.toLocaleTimeString("en-GB", {
-            hour: "numeric",
-            minute: "numeric",
-          })
-        }
-      </span>
+      <YourTime goTime={goTime} />
     </div>
     <div class="flex flex-col gap-4">
       <div class="flex justify-center gap-4 flex-col md:flex-row">
