@@ -1,0 +1,18 @@
+---
+export interface Props {
+  goTime: Date;
+}
+
+const { goTime } = Astro.props;
+---
+
+<p>
+  {
+    goTime.toLocaleDateString("en-GB", {
+      timeZone: "UTC",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    })
+  }
+</p>

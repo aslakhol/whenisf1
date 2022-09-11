@@ -1,0 +1,14 @@
+---
+export interface Props {
+  circuit: string;
+  session: string;
+}
+
+const { circuit, session } = Astro.props;
+---
+
+<p class="text-center px-4 text-3xl">
+  <span class="capitalized">{session}</span> at <span class="capitalized"
+    >{circuit}
+  </span> starts in:
+</p>

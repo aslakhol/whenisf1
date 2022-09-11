@@ -1,0 +1,15 @@
+---
+import RaceSessionLink from "./RaceSessionLink.astro";
+---
+
+<div class="flex flex-col gap-4">
+  <div class="flex justify-center gap-4 flex-col md:flex-row">
+    <RaceSessionLink href="/fp1" label="FP1" />
+    <RaceSessionLink href="/fp2" label="FP2" />
+    <RaceSessionLink href="/fp3" label="FP3" />
+  </div>
+  <div class="flex justify-center gap-4 flex-col md:flex-row">
+    <RaceSessionLink href="/qualifying" label="Qualifying" />
+    <RaceSessionLink href="/" label="Racing" />
+  </div>
+</div>

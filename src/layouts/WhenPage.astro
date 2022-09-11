@@ -1,8 +1,10 @@
 ---
 import Countdown from "../components/Countdown";
-import RaceSessionLink from "../components/RaceSessionLink.astro";
-import YourTime from "../components/YourTime";
+import RaceDate from "../components/RaceDate.astro";
+import RacingAt from "../components/RacingAt.astro";
 import Layout from "../layouts/Layout.astro";
+import RaceSessionLinks from "../components/RaceSessionLinks.astro";
+import RaceTimes from "../components/RaceTimes.astro";
 
 export interface Props {
   session: string;
@@ -19,50 +21,13 @@ const footerHeight = "4rem";
   <main
     class="bg-brand-bg flex flex-col justify-center items-center min-h-screen-content gap-8"
   >
-    <p class="text-center px-4 text-3xl">
-      <span class="capitalized">{session}</span> at <span class="capitalized"
-        >{circuit}
-      </span> starts in:
-    </p>
+    <RacingAt circuit={circuit} session={session} />
     <div class="h-32">
       <Countdown goTime={goTime} client:only={"react"} />
     </div>
-    <p>
-      {
-        goTime.toLocaleDateString("en-GB", {
-          timeZone: "UTC",
-          day: "numeric",
-          month: "short",
-          year: "numeric",
-        })
-      }
-    </p>
-
-    <div class="flex w-1/2 flex-col items-center md:flex-row md:justify-around">
-      <span class="p-4 bg-brand-secondary rounded w-40 text-center"
-        >UTC: {
-          goTime.toLocaleTimeString("en-GB", {
-            timeZone: "UTC",
-            hour: "numeric",
-            minute: "numeric",
-          })
-        }
-      </span>
-      <div class="w-40">
-        <YourTime goTime={goTime} client:only={"react"} />
-      </div>
-    </div>
-    <div class="flex flex-col gap-4">
-      <div class="flex justify-center gap-4 flex-col md:flex-row">
-        <RaceSessionLink href="/fp1" label="FP1" />
-        <RaceSessionLink href="/fp2" label="FP2" />
-        <RaceSessionLink href="/fp3" label="FP3" />
-      </div>
-      <div class="flex justify-center gap-4 flex-col md:flex-row">
-        <RaceSessionLink href="/qualifying" label="Qualifying" />
-        <RaceSessionLink href="/" label="Racing" />
-      </div>
-    </div>
+    <RaceDate goTime={goTime} />
+    <RaceTimes goTime={goTime} />
+    <RaceSessionLinks />
   </main>
   <footer class="bg-brand-bg flex justify-around items-center">
     <a class="hover:underline" href="about">About whenisf1.at</a>
