@@ -22,7 +22,9 @@ const footerHeight = "4rem";
     class="bg-brand-bg flex flex-col justify-center items-center min-h-screen-content gap-8"
   >
     <RacingAt circuit={circuit} session={session} />
-    <div class="h-32">
+    <div
+      class="h-32 break-inside-avoid text-7xl bold py-5 text-center flex items-center"
+    >
       <Countdown goTime={goTime} client:only={"react"} />
     </div>
     <RaceDate goTime={goTime} />

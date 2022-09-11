@@ -12,27 +12,31 @@ const Countdown = (props: CountdownProps) => {
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
+  if (diff < 0) {
+    return <>Session has started</>;
+  }
+
   if (days > 1) {
     return (
-      <span className="break-inside-avoid text-7xl bold py-5 text-center">
+      <>
         {days} day{days === 1 ? "" : "s"}
-      </span>
+      </>
     );
   }
 
   if (hours > 1) {
     return (
-      <span className="break-inside-avoid text-7xl bold py-5 text-center">
+      <>
         {hours} hour{hours === 1 ? "" : "s"} {minutes} minute
         {minutes === 1 ? "" : "s"}
-      </span>
+      </>
     );
   }
 
   return (
-    <span className="break-inside-avoid text-7xl bold py-5 text-center">
+    <>
       {minutes}:{seconds}
-    </span>
+    </>
   );
 };
 
