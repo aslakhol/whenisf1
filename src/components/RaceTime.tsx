@@ -1,12 +1,12 @@
-type RaceTimeProps = { goTime: Date; when: string };
+type RaceTimeProps = { goTime: Date; utc?: boolean };
 
 const RaceTime = (props: RaceTimeProps) => {
-  const { goTime, when } = props;
+  const { goTime, utc } = props;
 
   return (
     <>
-      {when}:{" "}
-      {goTime.toLocaleTimeString("en-GB", {
+      {goTime.toLocaleString("en-GB", {
+        timeZone: utc ? "UTC" : undefined,
         hour: "numeric",
         minute: "numeric",
       })}

@@ -2,9 +2,9 @@
 import Countdown from "../components/Countdown";
 import RaceDate from "../components/RaceDate.astro";
 import RacingAt from "../components/RacingAt.astro";
-import Layout from "../layouts/Layout.astro";
 import RaceSessionLinks from "../components/RaceSessionLinks.astro";
 import RaceTimes from "../components/RaceTimes.astro";
+import Page from "./Page.astro";
 
 export interface Props {
   session: string;
@@ -13,35 +13,16 @@ export interface Props {
 }
 
 const { session, goTime, circuit } = Astro.props;
-
-const footerHeight = "4rem";
 ---
 
-<Layout title="When is F1">
-  <main
-    class="bg-brand-bg flex flex-col justify-center items-center min-h-screen-content gap-8"
+<Page>
+  <RacingAt circuit={circuit} session={session} />
+  <div
+    class="h-32 break-inside-avoid text-7xl bold py-5 text-center flex items-center"
   >
-    <RacingAt circuit={circuit} session={session} />
-    <div
-      class="h-32 break-inside-avoid text-7xl bold py-5 text-center flex items-center"
-    >
-      <Countdown goTime={goTime} client:only={"react"} />
-    </div>
-    <RaceDate goTime={goTime} />
-    <RaceTimes goTime={goTime} />
-    <RaceSessionLinks />
-  </main>
-  <footer class="bg-brand-bg flex justify-around items-center">
-    <a class="hover:underline" href="about">About whenisf1.at</a>
-  </footer>
-</Layout>
-
-<style define:vars={{ footerHeight }}>
-  .min-h-screen-content {
-    min-height: calc(100vh - var(--footerHeight));
-  }
-
-  footer {
-    height: var(--footerHeight);
-  }
-</style>
+    <Countdown goTime={goTime} client:only={"react"} />
+  </div>
+  <RaceDate goTime={goTime} utc />
+  <RaceTimes goTime={goTime} />
+  <RaceSessionLinks />
+</Page>

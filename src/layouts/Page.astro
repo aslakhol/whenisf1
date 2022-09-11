@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const footerHeight = "6rem";
+---
+
+<Layout title="When is F1">
+  <main
+    class="bg-brand-bg flex flex-col justify-center items-center min-h-screen-content gap-8"
+  >
+    <slot />
+  </main>
+  <footer class="bg-brand-bg flex justify-around items-center">
+    <a class="hover:underline" href="schedule">Race schedule</a>
+    <a class="hover:underline" href="/">When is F1</a>
+    <a class="hover:underline" href="about">About whenisf1.at</a>
+  </footer>
+</Layout>
+
+<style define:vars={{ footerHeight }}>
+  .min-h-screen-content {
+    min-height: calc(100vh - var(--footerHeight));
+  }
+
+  footer {
+    height: var(--footerHeight);
+  }
+</style>

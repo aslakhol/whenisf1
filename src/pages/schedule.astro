@@ -1,0 +1,25 @@
+---
+import RaceTableEntry from "../components/RaceTableEntry.astro";
+import RaceTableHeadings from "../components/RaceTableHeadings.astro";
+import Page from "../layouts/Page.astro";
+import type monza from "../monza.json";
+
+type Race = typeof monza.MRData.RaceTable.Races[0];
+
+const races: Race[] = await fetch("http://ergast.com/api/f1/current.json")
+  .then((res) => res.json())
+  .then((data) => data.MRData.RaceTable.Races);
+---
+
+<Page>
+  <h1 class="text-5xl pt-8">Race Schedule</h1>
+
+  <table class="min-w-1/2 divide-y divide-gray-300">
+    <thead class="bg-gray-50">
+      <RaceTableHeadings />
+    </thead>
+    <tbody class="divide-y divide-gray-200 bg-white">
+      {races.map((race) => <RaceTableEntry race={race} />)}
+    </tbody>
+  </table>
+</Page>

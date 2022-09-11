@@ -12,9 +12,9 @@ const { goTime } = Astro.props;
   class="flex w-1/2 flex-col items-center md:flex-row md:justify-around gap-4 md:gap-0"
 >
   <span class="p-4 bg-brand-secondary rounded text-center w-40 h-14">
-    <RaceTime goTime={goTime} when={"UTC"} />
+    UTC: <RaceTime goTime={goTime} utc={true} />
   </span>
   <span class="p-4 bg-brand-secondary rounded text-center w-40 h-14">
-    <RaceTime goTime={goTime} when={"Your time"} client:only={"react"} />
+    Your time: <RaceTime goTime={goTime} client:only={"react"} />
   </span>
 </div>
