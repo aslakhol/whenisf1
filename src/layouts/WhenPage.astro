@@ -27,6 +27,17 @@ const footerHeight = "4rem";
     <div class="h-32">
       <Countdown goTime={goTime} client:only={"react"} />
     </div>
+    <p>
+      {
+        goTime.toLocaleDateString("en-GB", {
+          timeZone: "UTC",
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })
+      }
+    </p>
+
     <div class="flex w-1/2 flex-col items-center md:flex-row md:justify-around">
       <span class="p-4 bg-brand-secondary rounded w-40 text-center"
         >UTC: {
