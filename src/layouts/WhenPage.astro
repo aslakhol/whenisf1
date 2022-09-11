@@ -7,9 +7,10 @@ import Layout from "../layouts/Layout.astro";
 export interface Props {
   session: string;
   goTime: Date;
+  circuit: string;
 }
 
-const { session, goTime } = Astro.props;
+const { session, goTime, circuit } = Astro.props;
 
 const footerHeight = "4rem";
 ---
@@ -19,7 +20,9 @@ const footerHeight = "4rem";
     class="bg-red-500 flex flex-col justify-center items-center min-h-screen-content gap-8"
   >
     <p class="text-center px-4 text-3xl">
-      <span class="capitalized">{session}</span> at Monza starts in:
+      <span class="capitalized">{session}</span> at <span class="capitalized"
+        >{circuit}
+      </span> starts in:
     </p>
     <Countdown goTime={goTime} client:idle />
     <div class="flex w-1/2 flex-col items-center md:flex-row md:justify-around">

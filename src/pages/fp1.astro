@@ -1,13 +1,5 @@
 ---
-import WhenPage from "../layouts/WhenPage.astro";
-
-const data = await fetch("http://ergast.com/api/f1/current/next.json").then(
-  (res) => res.json()
-);
-
-const { date, time } = data.MRData.RaceTable.Races[0].FirstPractice;
-
-const goTime = new Date(date + "T" + time);
+import Fetch from "../layouts/Fetch.astro";
 ---
 
-<WhenPage session={"FP1"} goTime={goTime} />
+<Fetch session={"FP1"} sessionKey={"FirstPractice"} />

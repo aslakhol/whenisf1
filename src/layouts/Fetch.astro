@@ -1,0 +1,39 @@
+---
+import type monza from "../monza.json";
+import WhenPage from "./WhenPage.astro";
+
+export interface Props {
+  session: string;
+  sessionKey?:
+    | "FirstPractice"
+    | "SecondPractice"
+    | "ThirdPractice"
+    | "Qualifying";
+}
+
+const { session, sessionKey } = Astro.props;
+
+type DataType = typeof monza;
+
+const data: DataType = await fetch(
+  "http://ergast.com/api/f1/current/next.json"
+).then((res) => res.json());
+
+const circuit = data.MRData.RaceTable.Races[0].Circuit.Location.locality;
+
+const race = !sessionKey
+  ? data.MRData.RaceTable.Races[0]
+  : data.MRData.RaceTable.Races[0][sessionKey];
+
+const { date, time } = race;
+
+const goTime = new Date(date + "T" + time);
+---
+
+{
+  !data ? (
+    <h1>API request failed</h1>
+  ) : (
+    <WhenPage session={session} goTime={goTime} circuit={circuit} />
+  )
+}
