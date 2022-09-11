@@ -1,7 +1,7 @@
 ---
 import Countdown from "../components/Countdown";
 import RaceSessionLink from "../components/RaceSessionLink.astro";
-import YourTime from "../components/YourTime.astro";
+import YourTime from "../components/YourTime";
 import Layout from "../layouts/Layout.astro";
 
 export interface Props {
@@ -21,7 +21,7 @@ const footerHeight = "4rem";
     <p class="text-center px-4 text-3xl">
       <span class="capitalized">{session}</span> at Monza starts in:
     </p>
-    <Countdown goTime={goTime} />
+    <Countdown goTime={goTime} client:idle />
     <div class="flex w-1/2 flex-col items-center md:flex-row md:justify-around">
       <span
         >UTC: {
@@ -32,7 +32,7 @@ const footerHeight = "4rem";
           })
         }
       </span>
-      <YourTime goTime={goTime} />
+      <YourTime goTime={goTime} client:idle />
     </div>
     <div class="flex flex-col gap-4">
       <div class="flex justify-center gap-4 flex-col md:flex-row">
