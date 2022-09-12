@@ -41,31 +41,29 @@ const RaceTableEntry = (props: Props) => {
   const raceDate = new Date(race.date + "T" + race.time);
 
   return (
-    <>
-      <tr>
-        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-          {circuit}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <RaceDate goTime={raceDate} utc={utc} />
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <RaceTime goTime={fp1} utc={utc} />
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <RaceTime goTime={fp2} utc={utc} />
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <RaceTime goTime={fp3orSprint} utc={utc} />
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <RaceTime goTime={qualifying} utc={utc} />
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <RaceTime goTime={raceDate} utc={utc} />
-        </td>
-      </tr>
-    </>
+    <tr>
+      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+        {circuit}
+      </td>
+      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+        <RaceDate goTime={raceDate} utc={utc} />
+      </td>
+      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+        <RaceTime goTime={fp1} utc={utc} />
+      </td>
+      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+        <RaceTime goTime={fp2} utc={utc} />
+      </td>
+      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+        <RaceTime goTime={fp3orSprint} utc={utc} />
+      </td>
+      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+        <RaceTime goTime={qualifying} utc={utc} />
+      </td>
+      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+        <RaceTime goTime={raceDate} utc={utc} />
+      </td>
+    </tr>
   );
 };
 
