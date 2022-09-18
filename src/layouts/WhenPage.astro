@@ -1,9 +1,8 @@
 ---
 import Countdown from "../components/Countdown";
-import RaceDate from "../components/RaceDate";
+import SessionStart from "../components/SessionStart";
 import RacingAt from "../components/RacingAt.astro";
 import RaceSessionLinks from "../components/RaceSessionLinks.astro";
-import RaceTimes from "../components/RaceTimes.astro";
 import Page from "./Page.astro";
 
 export interface Props {
@@ -22,7 +21,9 @@ const { session, goTime, circuit } = Astro.props;
   >
     <Countdown goTime={goTime} client:only={"react"} />
   </div>
-  <RaceDate goTime={goTime} utc />
-  <RaceTimes goTime={goTime} />
+
+  <div class="h-6 mb-5">
+    <SessionStart goTime={goTime} client:only={"react"} />
+  </div>
   <RaceSessionLinks />
 </Page>
