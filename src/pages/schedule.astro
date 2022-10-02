@@ -12,6 +12,9 @@ const races: Race[] = await fetch("http://ergast.com/api/f1/current.json")
 
 <Page>
   <h1 class="text-5xl pt-8">Race Schedule</h1>
+  <p>The times are shown in your local timezone.</p>
 
-  <Schedule races={races} />
+  <div class="overflow-scroll max-w-full">
+    <Schedule races={races} />
+  </div>
 </Page>
