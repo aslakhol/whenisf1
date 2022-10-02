@@ -16,7 +16,7 @@ const Countdown = (props: CountdownProps) => {
     return <>Session has started</>;
   }
 
-  if (days > 1) {
+  if (days > 0) {
     return (
       <>
         {days} day{days === 1 ? "" : "s"}
@@ -24,7 +24,7 @@ const Countdown = (props: CountdownProps) => {
     );
   }
 
-  if (hours > 1) {
+  if (hours > 0) {
     return (
       <>
         {hours} hour{hours === 1 ? "" : "s"} {minutes} minute
