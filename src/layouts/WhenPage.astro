@@ -9,9 +9,10 @@ export interface Props {
   session: string;
   goTime: Date;
   circuit: string;
+  isSprint: boolean;
 }
 
-const { session, goTime, circuit } = Astro.props;
+const { session, goTime, circuit, isSprint } = Astro.props;
 ---
 
 <Page>
@@ -25,5 +26,5 @@ const { session, goTime, circuit } = Astro.props;
   <div class="h-6 mb-5">
     <SessionStart goTime={goTime} client:only={"react"} />
   </div>
-  <RaceSessionLinks />
+  <RaceSessionLinks isSprint={isSprint} />
 </Page>
