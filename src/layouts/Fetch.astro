@@ -31,6 +31,10 @@ if (isSprint && sessionKey === "ThirdPractice") {
   key = "Sprint";
 }
 
+if (!isSprint && sessionKey === "Sprint") {
+  key = "ThirdPractice";
+}
+
 const circuit = data.MRData.RaceTable.Races[0].Circuit.Location.locality;
 
 const race = !key
