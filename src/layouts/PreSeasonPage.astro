@@ -1,0 +1,30 @@
+---
+import Countdown from "../components/Countdown";
+import SessionStart from "../components/SessionStart";
+import RacingAt from "../components/RacingAt.astro";
+import RaceSessionLinks from "../components/RaceSessionLinks.astro";
+import Page from "./Page.astro";
+
+export interface Props {
+  goTime: Date;
+}
+
+const { goTime } = Astro.props;
+---
+
+<Page>
+  <p class="text-center px-4 text-3xl">
+    <span class="capitalized">F1</span> will return at <span class="capitalized"
+      >Bahrain
+    </span> in:
+  </p>
+  <div
+    class="h-32 break-inside-avoid text-7xl bold py-5 text-center flex items-center"
+  >
+    <Countdown goTime={goTime} client:only={"react"} />
+  </div>
+
+  <div class="h-6 mb-5">
+    <SessionStart goTime={goTime} client:only={"react"} />
+  </div>
+</Page>
