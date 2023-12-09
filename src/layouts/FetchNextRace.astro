@@ -40,9 +40,10 @@ if (!isSprint && sessionKey === "Sprint") {
 const circuit =
   data.MRData.RaceTable.Races[0]?.Circuit.Location.locality || "unknown";
 
-const race = !key
-  ? data.MRData.RaceTable.Races[0]
-  : data.MRData.RaceTable.Races[0][key];
+const race =
+  key && data.MRData.RaceTable.Races[0]
+    ? data.MRData.RaceTable.Races[0][key]
+    : data.MRData.RaceTable.Races[0];
 
 const goTime = race
   ? new Date(race.date + "T" + race.time)
