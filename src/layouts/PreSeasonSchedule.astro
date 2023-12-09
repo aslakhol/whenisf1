@@ -6,10 +6,345 @@ import type monza from "../monza.json";
 
 <Page>
   <h1 class="text-5xl pt-8">Race Schedule</h1>
-  <p>The times are shown in your local timezone.</p>
 
   <div class="overflow-scroll max-w-full">
-    No races
-    <!-- <Schedule races={races} /> -->
+    <table class="min-w-1/2 divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th
+            scope="col"
+            class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+          >
+            Date
+          </th>
+          <th
+            scope="col"
+            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+          >
+            Grand Prix
+          </th>
+          <th
+            scope="col"
+            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+          >
+            Venue
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            February 29 - March 2
+          </td>
+          <td class={`whitespace-nowrap px-3 py-4 text-sm text-gray-600`}>
+            Bahrain
+          </td>
+          <td class={`whitespace-nowrap px-3 py-4 text-sm text-gray-600`}>
+            Sakhir
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            March 7-9
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Saudi Arabia
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Jeddah
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            March 22-24
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Australia
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Melbourne
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            April 5-7
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Japan
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Suzuka
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            April 19-21
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            China
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Shanghai
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            May 3-5
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Miami
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Miami
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            May 17-19
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Emilia Romagna
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Imola
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            May 24-26
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Monaco
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Monaco
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            June 7-9
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Canada
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Montreal
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            June 21-23
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Spain
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Barcelona
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            June 28-30
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Austria
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Spielberg
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            July 5-7
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            United Kingdom
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Silverstone
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            July 19-21
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Hungary
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Budapest
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            July 26-28
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Belgium
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Spa
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            August 23-25
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Netherlands
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Zandvoort
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            August 30 – September 1
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Italy
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Monza
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            September 13-15
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Azerbaijan
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Baku
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            September 20-22
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Singapore
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Singapore
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            October 18-20
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            USA
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Austin
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            October 25-27
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Mexico
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Mexico City
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            November 1-3
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Brazil
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Sao Paulo
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            November 21-23
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Las Vegas
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Las Vegas
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            November 29 – December 1
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Qatar
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Lusail
+          </td>
+        </tr>
+        <tr>
+          <td
+            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+          >
+            December 6-8
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Abu Dhabi
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+            Yas Marina
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </Page>
