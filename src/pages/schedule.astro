@@ -1,20 +1,5 @@
 ---
-import Schedule from "../components/Schedule.astro";
-import Page from "../layouts/Page.astro";
-import type monza from "../monza.json";
-
-type Race = typeof monza.MRData.RaceTable.Races[0];
-
-const races: Race[] = await fetch("http://ergast.com/api/f1/current.json")
-  .then((res) => res.json())
-  .then((data) => data.MRData.RaceTable.Races);
+import ScheduleLayout from "../layouts/ScheduleLayout.astro";
 ---
 
-<Page>
-  <h1 class="text-5xl pt-8">Race Schedule</h1>
-  <p>The times are shown in your local timezone.</p>
-
-  <div class="overflow-scroll max-w-full">
-    <Schedule races={races} />
-  </div>
-</Page>
+<ScheduleLayout />

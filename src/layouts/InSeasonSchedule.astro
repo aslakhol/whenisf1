@@ -1,0 +1,22 @@
+---
+import Page from "./Page.astro";
+import Schedule from "../components/Schedule.astro";
+import type monza from "../monza.json";
+
+type Race = typeof monza.MRData.RaceTable.Races[0];
+
+export interface Props {
+  races: Race[];
+}
+
+const { races } = Astro.props;
+---
+
+<Page>
+  <h1 class="text-5xl pt-8">Race Schedule</h1>
+  <p>The times are shown in your local timezone.</p>
+
+  <div class="overflow-scroll max-w-full">
+    <Schedule races={races} />
+  </div>
+</Page>
