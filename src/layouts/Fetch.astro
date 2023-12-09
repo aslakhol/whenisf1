@@ -1,5 +1,6 @@
 ---
 import type monza from "../monza.json";
+import PreSeasonPage from "./PreSeasonPage.astro";
 import WhenPage from "./WhenPage.astro";
 
 type DataType = typeof monza;
@@ -23,7 +24,8 @@ const data: DataType = await fetch(
   "http://ergast.com/api/f1/current/next.json"
 ).then((res) => res.json());
 
-const isSprint = "Sprint" in data.MRData.RaceTable.Races[0];
+const isSprint =
+  data.MRData.RaceTable.Races[0] && "Sprint" in data.MRData.RaceTable.Races[0];
 
 let key: SessionKey = sessionKey;
 
@@ -35,20 +37,21 @@ if (!isSprint && sessionKey === "Sprint") {
   key = "ThirdPractice";
 }
 
-const circuit = data.MRData.RaceTable.Races[0].Circuit.Location.locality;
+const circuit =
+  data.MRData.RaceTable.Races[0]?.Circuit.Location.locality || "unknown";
 
 const race = !key
   ? data.MRData.RaceTable.Races[0]
   : data.MRData.RaceTable.Races[0][key];
 
-const { date, time } = race;
-
-const goTime = new Date(date + "T" + time);
+const goTime = race
+  ? new Date(race.date + "T" + race.time)
+  : new Date(Date.UTC(2024, 2, 2, 15, 0, 0)); // 2nd March 2024, 15:00 UTC, the planned start of the 2024 season
 ---
 
 {
-  !data ? (
-    <h1>API request failed</h1>
+  data.MRData.RaceTable.Races.length < 1 ? (
+    <PreSeasonPage goTime={goTime} />
   ) : (
     <WhenPage
       session={session}
