@@ -1,5 +1,21 @@
 ---
-import ScheduleLayout from "../layouts/ScheduleLayout.astro";
+import InSeasonSchedule from "../views/InSeasonSchedule.astro";
+import PreSeasonSchedule from "../views/PreSeasonSchedule.astro";
+import type monza from "../monza.json";
+
+type RaceTable = typeof monza.MRData.RaceTable;
+
+const raceTable: RaceTable = await fetch(
+  "http://ergast.com/api/f1/current.json"
+)
+  .then((res) => res.json())
+  .then((data) => data.MRData.RaceTable.Races);
 ---
 
-<ScheduleLayout />
+{
+  raceTable.season !== "2024" ? (
+    <PreSeasonSchedule />
+  ) : (
+    <InSeasonSchedule races={raceTable.Races} />
+  )
+}

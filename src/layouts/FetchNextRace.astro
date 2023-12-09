@@ -1,7 +1,7 @@
 ---
 import type monza from "../monza.json";
-import PreSeasonPage from "./PreSeasonPage.astro";
-import WhenPage from "./WhenPage.astro";
+import PreSeasonMain from "../views/PreSeasonMain.astro";
+import Main from "../views/Main.astro";
 
 type DataType = typeof monza;
 
@@ -51,9 +51,9 @@ const goTime = race
 
 {
   data.MRData.RaceTable.Races.length < 1 ? (
-    <PreSeasonPage goTime={goTime} />
+    <PreSeasonMain goTime={goTime} />
   ) : (
-    <WhenPage
+    <Main
       session={session}
       goTime={goTime}
       circuit={circuit}
