@@ -46,7 +46,7 @@ const race =
     : data.MRData.RaceTable.Races[0];
 
 const preSeason =
-  data.MRData.RaceTable.Races.length < 1 || race.time === undefined;
+  data.MRData.RaceTable.Races.length < 1 || race?.time === undefined;
 
 const goTime = race
   ? new Date(`${race.date}T${race.time ?? "15:00:00"}`)
