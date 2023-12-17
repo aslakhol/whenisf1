@@ -45,13 +45,16 @@ const race =
     ? data.MRData.RaceTable.Races[0][key]
     : data.MRData.RaceTable.Races[0];
 
+const preSeason =
+  data.MRData.RaceTable.Races.length < 1 || race.time === undefined;
+
 const goTime = race
-  ? new Date(race.date + "T" + race.time)
+  ? new Date(`${race.date}T${race.time ?? "15:00:00"}`)
   : new Date(Date.UTC(2024, 2, 2, 15, 0, 0)); // 2nd March 2024, 15:00 UTC, the planned start of the 2024 season
 ---
 
 {
-  data.MRData.RaceTable.Races.length < 1 ? (
+  preSeason ? (
     <PreSeasonMain goTime={goTime} />
   ) : (
     <Main
