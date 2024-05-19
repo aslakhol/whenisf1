@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react";
+
 type CountdownProps = { goTime: Date };
 
 const Countdown = (props: CountdownProps) => {
   const { goTime } = props;
+  const [now, setNow] = useState(new Date());
 
-  const now = new Date();
+  useEffect(() => {
+    const nowInterval = setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+    return () => clearInterval(nowInterval);
+  }, []);
 
   const diff = goTime.getTime() - now.getTime();
 
