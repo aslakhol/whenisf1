@@ -21,7 +21,7 @@ export interface Props {
 const { session, sessionKey } = Astro.props;
 
 const data: DataType = await fetch(
-  "http://ergast.com/api/f1/current/next.json"
+  "http://api.jolpi.ca/ergast/f1/current/next.json"
 ).then((res) => res.json());
 
 const isSprint =
