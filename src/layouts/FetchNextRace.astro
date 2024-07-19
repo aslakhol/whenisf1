@@ -20,12 +20,19 @@ export interface Props {
 
 const { session, sessionKey } = Astro.props;
 
-const data: DataType = await fetch(
-  "http://ergast.com/api/f1/current/next.json"
-).then((res) => res.json());
+// const data: DataType = await fetch("http://ergast.com/api/f1/current/next.json")
+//   .then((res) => {
+//     console.log(res);
+//     return res.json();
+//   })
+//   .catch((e) => {
+//     console.error(e);
+//     throw new Error(e.message);
+//   });
 
-const isSprint =
-  data.MRData.RaceTable.Races[0] && "Sprint" in data.MRData.RaceTable.Races[0];
+// const isSprint =
+//   data.MRData.RaceTable.Races[0] && "Sprint" in data.MRData.RaceTable.Races[0];
+const isSprint = false;
 
 let key: SessionKey = sessionKey;
 
@@ -37,16 +44,29 @@ if (!isSprint && sessionKey === "Sprint") {
   key = "ThirdPractice";
 }
 
-const circuit =
-  data.MRData.RaceTable.Races[0]?.Circuit.Location.locality || "unknown";
+// const circuit =
+//   data.MRData.RaceTable.Races[0]?.Circuit.Location.locality || "unknown";
+const circuit = "Hungaroring";
 
-const race =
-  key && data.MRData.RaceTable.Races[0]
-    ? data.MRData.RaceTable.Races[0][key]
-    : data.MRData.RaceTable.Races[0];
+const d = {
+  date: "2024-07-21",
+  time: "13:00:00Z",
+  FirstPractice: { date: "2024-07-19", time: "11:30:00Z" },
+  SecondPractice: { date: "2024-07-19", time: "15:00:00Z" },
+  ThirdPractice: { date: "2024-07-20", time: "10:30:00Z" },
+  Qualifying: { date: "2024-07-20", time: "14:00:00Z" },
+  Sprint: { date: "2024-07-21", time: "13:00:00Z" },
+};
 
-const preSeason =
-  data.MRData.RaceTable.Races.length < 1 || race?.time === undefined;
+const race = key && d ? d[key] : d;
+
+// const race =
+//   key && data.MRData.RaceTable.Races[0]
+//     ? data.MRData.RaceTable.Races[0][key]
+//     : data.MRData.RaceTable.Races[0];
+
+const preSeason = false;
+// data.MRData.RaceTable.Races.length < 1 || race?.time === undefined;
 
 const goTime = race
   ? new Date(`${race.date}T${race.time ?? "15:00:00"}`)
