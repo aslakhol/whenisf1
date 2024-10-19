@@ -11,6 +11,7 @@ type SessionKey =
   | "ThirdPractice"
   | "Qualifying"
   | "Sprint"
+  | "SprintQualifying"
   | undefined;
 
 export interface Props {
@@ -35,6 +36,14 @@ if (isSprint && sessionKey === "ThirdPractice") {
 
 if (!isSprint && sessionKey === "Sprint") {
   key = "ThirdPractice";
+}
+
+if (isSprint && sessionKey === "SecondPractice") {
+  key = "SprintQualifying";
+}
+
+if (!isSprint && sessionKey === "SprintQualifying") {
+  key = "SecondPractice";
 }
 
 const circuit =
