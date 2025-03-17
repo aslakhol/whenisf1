@@ -1,6 +1,7 @@
 import type { ScheduleRace } from "../types";
 import RaceDate from "./RaceDate";
 import RaceTime from "./RaceTime";
+import { useState, useEffect } from "react";
 
 interface Props {
   race: ScheduleRace;
@@ -9,8 +10,13 @@ interface Props {
 
 const RaceTableEntry = (props: Props) => {
   const { race, utc } = props;
+  const [isPast, setIsPast] = useState(false);
 
-  const now = new Date();
+  useEffect(() => {
+    const now = new Date();
+    const raceDate = new Date(race.date + "T" + race.time);
+    setIsPast(raceDate <= now);
+  }, [race.date, race.time]);
 
   const circuit = race.Circuit.Location.locality;
   const fp1 = new Date(race.FirstPractice.date + "T" + race.FirstPractice.time);
@@ -36,42 +42,42 @@ const RaceTableEntry = (props: Props) => {
       </td>
       <td
         className={`whitespace-nowrap px-3 py-4 text-sm ${
-          raceDate > now ? "text-gray-600" : "text-gray-400"
+          !isPast ? "text-gray-600" : "text-gray-400"
         }`}
       >
         <RaceDate goTime={raceDate} utc={utc} />
       </td>
       <td
         className={`whitespace-nowrap px-3 py-4 text-sm ${
-          fp1 > now ? "text-gray-600" : "text-gray-400"
+          !isPast ? "text-gray-600" : "text-gray-400"
         }`}
       >
         <RaceTime goTime={fp1} utc={utc} />
       </td>
       <td
         className={`whitespace-nowrap px-3 py-4 text-sm ${
-          fp2orSprintQualifying > now ? "text-gray-600" : "text-gray-400"
+          !isPast ? "text-gray-600" : "text-gray-400"
         }`}
       >
         <RaceTime goTime={fp2orSprintQualifying} utc={utc} />
       </td>
       <td
         className={`whitespace-nowrap px-3 py-4 text-sm ${
-          fp3orSprint > now ? "text-gray-600" : "text-gray-400"
+          !isPast ? "text-gray-600" : "text-gray-400"
         }`}
       >
         <RaceTime goTime={fp3orSprint} utc={utc} />
       </td>
       <td
         className={`whitespace-nowrap px-3 py-4 text-sm ${
-          qualifying > now ? "text-gray-600" : "text-gray-400"
+          !isPast ? "text-gray-600" : "text-gray-400"
         }`}
       >
         <RaceTime goTime={qualifying} utc={utc} />
       </td>
       <td
         className={`whitespace-nowrap px-3 py-4 text-sm ${
-          raceDate > now ? "text-gray-600" : "text-gray-400"
+          !isPast ? "text-gray-600" : "text-gray-400"
         }`}
       >
         <RaceTime goTime={raceDate} utc={utc} />
