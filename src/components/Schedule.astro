@@ -1,12 +1,10 @@
 ---
-import type monza from "../monza.json";
 import RaceTableEntry from "./RaceTableEntry";
 import RaceTableHeadings from "./RaceTableHeadings";
-
-type Races = typeof monza.MRData.RaceTable.Races;
+import type { ScheduleRace } from "../types";
 
 export interface Props {
-  races: Races;
+  races: ScheduleRace[];
 }
 
 const { races } = Astro.props;
