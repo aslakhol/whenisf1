@@ -1,24 +1,9 @@
+import type { ScheduleRace } from "../types";
 import RaceDate from "./RaceDate";
 import RaceTime from "./RaceTime";
 
-type Session = { date: string; time: string };
-
-type Race = {
-  Circuit: {
-    circuitId: string;
-    Location: { locality: string; country: string };
-  };
-  date: string;
-  time: string;
-  FirstPractice: Session;
-  SecondPractice: Session;
-  Qualifying: Session;
-  ThirdPractice?: Session;
-  Sprint?: Session;
-};
-
 interface Props {
-  race: Race;
+  race: ScheduleRace;
   utc: boolean;
 }
 
@@ -29,8 +14,10 @@ const RaceTableEntry = (props: Props) => {
 
   const circuit = race.Circuit.Location.locality;
   const fp1 = new Date(race.FirstPractice.date + "T" + race.FirstPractice.time);
-  const fp2 = new Date(
-    race.SecondPractice.date + "T" + race.SecondPractice.time
+  const fp2orSprintQualifying = new Date(
+    `${race.SecondPractice?.date || race.SprintQualifying?.date}T${
+      race.SecondPractice?.time || race.SprintQualifying?.time
+    }`
   );
   const fp3orSprint = new Date(
     `${race.ThirdPractice?.date || race.Sprint?.date}T${
@@ -63,10 +50,10 @@ const RaceTableEntry = (props: Props) => {
       </td>
       <td
         className={`whitespace-nowrap px-3 py-4 text-sm ${
-          fp2 > now ? "text-gray-600" : "text-gray-400"
+          fp2orSprintQualifying > now ? "text-gray-600" : "text-gray-400"
         }`}
       >
-        <RaceTime goTime={fp2} utc={utc} />
+        <RaceTime goTime={fp2orSprintQualifying} utc={utc} />
       </td>
       <td
         className={`whitespace-nowrap px-3 py-4 text-sm ${
