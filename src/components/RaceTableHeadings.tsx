@@ -23,7 +23,7 @@ const RaceTableHeadings = () => {
         scope="col"
         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
       >
-        FP2
+        FP2/SQ
       </th>
       <th
         scope="col"
