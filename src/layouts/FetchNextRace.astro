@@ -1,18 +1,7 @@
 ---
-import type monza from "../monza.json";
 import PreSeasonMain from "../views/PreSeasonMain.astro";
 import Main from "../views/Main.astro";
-
-type DataType = typeof monza;
-
-type SessionKey =
-  | "FirstPractice"
-  | "SecondPractice"
-  | "ThirdPractice"
-  | "Qualifying"
-  | "Sprint"
-  | "SprintQualifying"
-  | undefined;
+import type { ApiRace, ApiResponse, SessionKey } from "../types";
 
 export interface Props {
   session: string;
@@ -21,41 +10,42 @@ export interface Props {
 
 const { session, sessionKey } = Astro.props;
 
-const data: DataType = await fetch(
-  "http://api.jolpi.ca/ergast/f1/current/next.json"
+const data: ApiResponse = await fetch(
+  "https://api.jolpi.ca/ergast/f1/current/next.json"
 ).then((res) => res.json());
 
-const isSprint =
-  data.MRData.RaceTable.Races[0] && "Sprint" in data.MRData.RaceTable.Races[0];
+const nextRace = data.MRData.RaceTable.Races[0];
 
-let key: SessionKey = sessionKey;
+const isSprint = Boolean(
+  nextRace?.Sprint || nextRace?.SprintQualifying || nextRace?.SprintShootout
+);
 
-if (isSprint && sessionKey === "ThirdPractice") {
-  key = "Sprint";
-}
+const resolveSession = (race: ApiRace | undefined, key: SessionKey | undefined) => {
+  if (!race || !key) return race;
 
-if (!isSprint && sessionKey === "Sprint") {
-  key = "ThirdPractice";
-}
+  switch (key) {
+    case "FirstPractice":
+      return race.FirstPractice || race;
+    case "SecondPractice":
+      return race.SecondPractice || race.SprintQualifying || race.SprintShootout || race;
+    case "ThirdPractice":
+      return race.ThirdPractice || race.Sprint || race;
+    case "Qualifying":
+      return race.Qualifying || race;
+    case "Sprint":
+      return race.Sprint || race.ThirdPractice || race;
+    case "SprintQualifying":
+      return race.SprintQualifying || race.SprintShootout || race.SecondPractice || race;
+    case "SprintShootout":
+      return race.SprintShootout || race.SprintQualifying || race.SecondPractice || race;
+  }
+};
 
-if (isSprint && sessionKey === "SecondPractice") {
-  key = "SprintQualifying";
-}
-
-if (!isSprint && sessionKey === "SprintQualifying") {
-  key = "SecondPractice";
-}
-
-const circuit =
-  data.MRData.RaceTable.Races[0]?.Circuit.Location.locality || "unknown";
-
-const race =
-  key && data.MRData.RaceTable.Races[0]
-    ? data.MRData.RaceTable.Races[0][key]
-    : data.MRData.RaceTable.Races[0];
+const circuit = nextRace?.Circuit.Location.locality || "unknown";
+const race = resolveSession(nextRace, sessionKey);
 
 const preSeason =
-  data.MRData.RaceTable.Races.length < 1 || race?.time === undefined;
+  data.MRData.RaceTable.Races.length < 1 || race?.date === undefined;
 
 const goTime = race
   ? new Date(`${race.date}T${race.time ?? "15:00:00"}`)

@@ -18,22 +18,26 @@ const RaceTableEntry = (props: Props) => {
     setIsPast(raceDate <= now);
   }, [race.date, race.time]);
 
-  const circuit = race.Circuit.Location.locality;
-  const fp1 = new Date(race.FirstPractice.date + "T" + race.FirstPractice.time);
-  const fp2orSprintQualifying = new Date(
-    `${race.SecondPractice?.date || race.SprintQualifying?.date}T${
-      race.SecondPractice?.time || race.SprintQualifying?.time
-    }`
-  );
-  const fp3orSprint = new Date(
-    `${race.ThirdPractice?.date || race.Sprint?.date}T${
-      race.ThirdPractice?.time || race.Sprint?.time
-    }`
-  );
-  const qualifying = new Date(
-    race.Qualifying.date + "T" + race.Qualifying.time
-  );
   const raceDate = new Date(race.date + "T" + race.time);
+
+  const sessionToDate = (
+    primary?: { date: string; time: string },
+    fallback?: { date: string; time: string }
+  ) =>
+    new Date(
+      `${(primary || fallback || race).date}T${
+        (primary || fallback || race).time
+      }`
+    );
+
+  const circuit = race.Circuit.Location.locality;
+  const fp1 = sessionToDate(race.FirstPractice);
+  const fp2orSprintQualifying = sessionToDate(
+    race.SecondPractice,
+    race.SprintQualifying || race.SprintShootout
+  );
+  const fp3orSprint = sessionToDate(race.ThirdPractice, race.Sprint);
+  const qualifying = sessionToDate(race.Qualifying);
 
   return (
     <tr>
