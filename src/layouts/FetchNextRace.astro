@@ -1,7 +1,9 @@
 ---
+import currentYear from "../currentYear.json";
+import { getNextRaceTable } from "../lib/raceData";
 import PreSeasonMain from "../views/PreSeasonMain.astro";
 import Main from "../views/Main.astro";
-import type { ApiRace, ApiResponse, SessionKey } from "../types";
+import type { ApiRace, SessionKey } from "../types";
 
 export interface Props {
   session: string;
@@ -10,11 +12,8 @@ export interface Props {
 
 const { session, sessionKey } = Astro.props;
 
-const data: ApiResponse = await fetch(
-  "https://api.jolpi.ca/ergast/f1/current/next.json"
-).then((res) => res.json());
-
-const nextRace = data.MRData.RaceTable.Races[0];
+const raceTable = await getNextRaceTable();
+const nextRace = raceTable.Races[0];
 
 const isSprint = Boolean(
   nextRace?.Sprint || nextRace?.SprintQualifying || nextRace?.SprintShootout
@@ -45,11 +44,16 @@ const circuit = nextRace?.Circuit.Location.locality || "unknown";
 const race = resolveSession(nextRace, sessionKey);
 
 const preSeason =
-  data.MRData.RaceTable.Races.length < 1 || race?.date === undefined;
+  raceTable.Races.length < 1 || race?.date === undefined;
+
+const seasonOpener = currentYear.MRData.RaceTable.Races[0];
+const fallbackGoTime = seasonOpener
+  ? new Date(`${seasonOpener.date}T${seasonOpener.time ?? "15:00:00Z"}`)
+  : new Date();
 
 const goTime = race
-  ? new Date(`${race.date}T${race.time ?? "15:00:00"}`)
-  : new Date(Date.UTC(2024, 2, 2, 15, 0, 0)); // 2nd March 2024, 15:00 UTC, the planned start of the 2024 season
+  ? new Date(`${race.date}T${race.time ?? "15:00:00Z"}`)
+  : fallbackGoTime;
 ---
 
 {

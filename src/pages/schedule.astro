@@ -1,21 +1,17 @@
 ---
 import InSeasonSchedule from "../views/InSeasonSchedule.astro";
-import PreSeasonSchedule from "../views/PreSeasonSchedule.astro";
 import currentYear from "../currentYear.json";
+import { getCurrentRaceTable } from "../lib/raceData";
 
 type RaceTable = typeof currentYear.MRData.RaceTable;
 
-const raceTable: RaceTable = await fetch(
-  "https://api.jolpi.ca/ergast/f1/current.json"
-)
-  .then((res) => res.json())
-  .then((data) => data.MRData.RaceTable);
-
-console.log(raceTable.season, "raceTable");
+const raceTable: RaceTable = await getCurrentRaceTable();
+const shouldUseLiveTable =
+  raceTable.season === currentYear.MRData.RaceTable.season;
 ---
 
 {
-  raceTable.season !== "2026" ? (
+  !shouldUseLiveTable ? (
     <InSeasonSchedule races={currentYear.MRData.RaceTable.Races} />
   ) : (
     <InSeasonSchedule races={raceTable.Races} />
